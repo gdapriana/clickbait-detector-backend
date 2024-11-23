@@ -44,7 +44,7 @@ def end_predict():
   return jsonify({"prediction": predicted[0][1]})
 
 if __name__ == '__main__':
-  dataset = pd.read_csv("resources/dataset.csv", index_col=False)
+  dataset = pd.read_csv("dataset.csv", index_col=False)
   X_train, X_test, y_train, y_test = preprocessing_dataset(dataset)
   model.fit(X_train, y_train)
   app.run()
