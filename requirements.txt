@@ -24,7 +24,7 @@ libclang==18.1.1
 Markdown==3.7
 MarkupSafe==3.0.2
 nltk==3.9.1
-numpy==1.24.3
+numpy==1.26.4
 oauthlib==3.2.2
 opt_einsum==3.4.0
 packaging==24.2
