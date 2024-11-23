@@ -28,9 +28,9 @@ def hello_world():
 def end_dataset():
   df, dataset_title, dataset_subtitle, dataset_link = get_dataset(num_row=10)
   return jsonify({"dataset": df,
-                  dataset_title: dataset_title,
-                  dataset_subtitle: dataset_subtitle,
-                  dataset_link: dataset_link
+                  "dataset_title": dataset_title,
+                  "dataset_subtitle": dataset_subtitle,
+                  "dataset_link": dataset_link
                   })
 
 @app.route('/predict', methods=['POST'])
