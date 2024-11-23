@@ -1,15 +1,23 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 from resources.dataset import get_dataset
-from resources.model import get_model
-from resources.preprocessing import preprocessing_input
+from resources.preprocessing import preprocessing_input, preprocessing_dataset
 import pandas as pd
+from sklearn.neural_network import MLPClassifier
+
 
 app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 dataset = []
+model = MLPClassifier(
+  hidden_layer_sizes=(64, 32),  # Two hidden layers with 64 and 32 neurons
+  activation='relu',            # ReLU activation function
+  solver='adam',                # Optimizer
+  max_iter=10,                 # Maximum number of epochs (iterations)
+  random_state=42               # Set a random state for reproducibility
+)
 
 @app.route('/')
 @cross_origin()
@@ -32,10 +40,11 @@ def end_predict():
   data = request.get_json()
   new_text = data['text']
   processed_text = preprocessing_input(new_text, df=dataset)
-  model = get_model()
-  prediction = model.predict(processed_text)[0][0]
-  return jsonify({"prediction": prediction})
+  predicted = model.predict_proba(processed_text)
+  return jsonify({"prediction": predicted[0][1]})
 
 if __name__ == '__main__':
   dataset = pd.read_csv("resources/dataset.csv", index_col=False)
+  X_train, X_test, y_train, y_test = preprocessing_dataset(dataset)
+  model.fit(X_train, y_train)
   app.run()
