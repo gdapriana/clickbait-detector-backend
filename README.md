@@ -1,9 +1,9 @@
-# Kelayakan Pinjaman
-Menggunakan metode fuzzy tsukamoto.
+# Clickbait Detector using ANN
 
 | API | https://clickbait-detector-7e44ec055fea.herokuapp.com/                                                                                                                 |
 |-----|------------------------------------------------------------------------------------------------------------------|
-|Colab| <a href="https://colab.research.google.com/drive/1X-aTqftdPzJnKl499c5LlvG6U_C_M6vZ?usp=sharing">Google Colab</a> |
+|Colab| |
+
 
 ## API Documentations
 | <b>endpoint</b> | `API/predict`               |
