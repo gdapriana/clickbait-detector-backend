@@ -18,7 +18,15 @@ def hello_world():
 @app.route('/dataset')
 @cross_origin()
 def end_dataset():
-  row = int(request.args.get('row'))
+  row = request.args.get('row')
+
+  try:
+    if row is None:
+      row = 10
+    row = int(row)
+  except ValueError:
+    return jsonify({"message": "wrong input"})
+
   (df,
    dataset_title,
    dataset_subtitle,

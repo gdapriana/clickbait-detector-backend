@@ -16,8 +16,6 @@ def get_dataset(num_row=5):
   true_label = len(dataset[dataset['clickbait'] == 1])
   false_label = len(dataset[dataset['clickbait'] == 0])
 
-  print(true_label)
-
   balanced_df = balanced_df.head(num_row)
   json_records = balanced_df.to_json(orient="records")
   df = json.loads(json_records)
