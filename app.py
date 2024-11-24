@@ -10,14 +10,6 @@ app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-# model = MLPClassifier(
-#   hidden_layer_sizes=(64, 32),
-#   activation='relu',
-#   solver='adam',
-#   max_iter=10,
-#   random_state=42
-# )
-
 @app.route('/')
 @cross_origin()
 def hello_world():
