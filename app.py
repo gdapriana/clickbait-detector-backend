@@ -1,8 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 from resources.dataset import get_dataset
-from resources.preprocessing import preprocessing_input, preprocessing_dataset
-from sklearn.neural_network import MLPClassifier
+from resources.preprocessing import preprocessing_input
 import joblib
 
 
