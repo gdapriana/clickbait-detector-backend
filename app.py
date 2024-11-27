@@ -2,7 +2,11 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 from resources.dataset import get_dataset
 from resources.preprocessing import preprocessing_input
+from resources.member import member
+from resources.evaluate import evaluate
+from resources.model import model_info
 import joblib
+import json
 
 
 app = Flask(__name__)
@@ -43,6 +47,36 @@ def end_dataset():
                   "true_label": true_label,
                   "false_label": false_label
                   })
+
+@app.route('/model')
+@cross_origin()
+def end_model():
+
+  model_config, model_compile_config = model_info()
+  con_matrix, accuracy, precision, recall = evaluate()
+  lib_info = {
+    "name": "tensorflow",
+    "source": "https://www.tensorflow.org/",
+    "description": "TensorFlow makes it easy to create ML models that can run in any environment. Learn how to use the intuitive APIs through interactive code samples",
+    "logo": "https://www.gstatic.com/devrel-devsite/prod/v870e399c64f7c43c99a3043db4b3a74327bb93d0914e84a0c3dba90bbfd67625/tensorflow/images/lockup.svg"
+  }
+  return jsonify({ "model_config": model_config,
+                   "model_compile": model_compile_config,
+                   "evaluate": {
+                     "con_matrix": con_matrix,
+                     "accuracy": accuracy,
+                     "precision": precision,
+                     "recall": recall
+                   },
+                   "lib_info": lib_info
+                   })
+
+
+@app.route('/member')
+@cross_origin()
+def end_member():
+  all_member = json.loads(json.dumps(member()))
+  return jsonify({"all_member": all_member})
 
 @app.route('/predict', methods=['POST'])
 @cross_origin()
