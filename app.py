@@ -58,7 +58,7 @@ def end_model():
     "name": "tensorflow",
     "source": "https://www.tensorflow.org/",
     "description": "TensorFlow makes it easy to create ML models that can run in any environment. Learn how to use the intuitive APIs through interactive code samples",
-    "logo": "https://www.gstatic.com/devrel-devsite/prod/v870e399c64f7c43c99a3043db4b3a74327bb93d0914e84a0c3dba90bbfd67625/tensorflow/images/lockup.svg"
+    "logo": "https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/google-tensorflow-icon.png"
   }
   return jsonify({ "model_config": model_config,
                    "model_compile": model_compile_config,
