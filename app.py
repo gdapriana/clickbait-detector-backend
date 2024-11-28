@@ -8,6 +8,7 @@ from resources.model import model_info
 import joblib
 import json
 
+from resources.tech import get_tech
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -51,7 +52,6 @@ def end_dataset():
 @app.route('/model')
 @cross_origin()
 def end_model():
-
   model_config, model_compile_config = model_info()
   con_matrix, accuracy, precision, recall = evaluate()
   lib_info = {
@@ -77,6 +77,15 @@ def end_model():
 def end_member():
   all_member = json.loads(json.dumps(member()))
   return jsonify({"all_member": all_member})
+
+@app.route('/tech')
+@cross_origin()
+def end_tech():
+  frontend, api, backend = get_tech()
+  frontend = json.loads(json.dumps(frontend))
+  api = json.loads(json.dumps(api))
+  backend = json.loads(json.dumps(backend))
+  return jsonify({"frontend": frontend, "api": api, "backend": backend})
 
 @app.route('/predict', methods=['POST'])
 @cross_origin()
